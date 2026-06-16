@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>URGAZ — Premium Gilamlar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0F0F1A;
+      --bg2:       #16162A;
+      --card:      #1C1C30;
+      --gold:      #C9A84C;
+      --gold-lt:   #E2C97E;
+      --gold-dk:   #9A7A2E;
+      --white:     #F5F0E8;
+      --muted:     #9896A4;
+      --divider:   rgba(201,168,76,0.18);
+      --radius:    12px;
+      --shadow:    0 8px 32px rgba(0,0,0,0.45);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ───────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,15,26,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+    }
+
+    .header-badge {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      border: 1px solid var(--divider);
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 48px 24px 52px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Carpet-weave SVG texture overlay */
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    /* Radial glow behind headline */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 20px;
+      padding: 6px 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: clamp(32px, 9vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 320px;
+      margin: 16px auto 28px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+    }
+
+    .stat {
+      flex: 1;
+      padding: 14px 8px;
+      text-align: center;
+      position: relative;
+    }
+
+    .stat + .stat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: var(--divider);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTION HEADER ───────────────────────────── */
+    .section-header {
+      padding: 32px 24px 8px;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    /* ── PRODUCT GRID ─────────────────────────────── */
+    .catalog {
+      padding: 16px 16px 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card:active {
+      transform: scale(0.97);
+      box-shadow: var(--shadow);
+    }
+
+    /* Carpet pattern placeholders — each unique */
+    .card-img {
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--gold);
+      color: #0F0F1A;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .card-body {
+      padding: 10px 12px 12px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .card-meta {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .card-price {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .card-unit {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* ── OFFER BANNER ─────────────────────────────── */
+    .offer-banner {
+      margin: 20px 16px;
+      background: linear-gradient(135deg, #1E1A0C 0%, #2A2010 50%, #1E1A0C 100%);
+      border: 1px solid var(--gold-dk);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 0% 50%, rgba(201,168,76,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .offer-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .offer-text h3 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold-lt);
+      margin-bottom: 4px;
+    }
+
+    .offer-text p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── FEATURES ─────────────────────────────────── */
+    .features {
+      padding: 8px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-item {
+      background: var(--bg2);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .feature-text p {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── CTA SECTION ──────────────────────────────── */
+    .cta-section {
+      padding: 28px 20px 120px;
+      text-align: center;
+    }
+
+    .cta-section > p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      letter-spacing: 0.03em;
+    }
+
+    .cta-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--divider);
+      margin: 0 auto 18px;
+    }
+
+    /* ── STICKY BOTTOM BAR ────────────────────────── */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(15,15,26,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--divider);
+      padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      padding: 14px 8px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      -webkit-tap-highlight-color: transparent;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
+      color: #0F0F1A;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 10px rgba(201,168,76,0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(245,240,232,0.2);
+    }
+
+    .btn-secondary:active {
+      background: rgba(245,240,232,0.06);
+      transform: scale(0.97);
+    }
+
+    .btn-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--divider);
+      padding: 24px 24px 140px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-sep {
+      width: 32px;
+      height: 1px;
+      background: var(--divider);
+      margin: 16px auto;
+    }
+
+    .footer-legal {
+      font-size: 10.5px;
+      color: rgba(152,150,164,0.6);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="brand">
+      <!-- Brand mark: geometric carpet-diamond SVG -->
+      <svg class="brand-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="34" height="34" rx="6" fill="rgba(201,168,76,0.12)"/>
+        <polygon points="17,4 30,17 17,30 4,17" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+        <polygon points="17,9 25,17 17,25 9,17" fill="rgba(201,168,76,0.15)" stroke="#C9A84C" stroke-width="1"/>
+        <circle cx="17" cy="17" r="3" fill="#C9A84C"/>
+        <line x1="17" y1="4"  x2="17" y2="9"  stroke="#C9A84C" stroke-width="1"/>
+        <line x1="17" y1="25" x2="17" y2="30" stroke="#C9A84C" stroke-width="1"/>
+        <line x1="4"  y1="17" x2="9"  y2="17" stroke="#C9A84C" stroke-width="1"/>
+        <line x1="25" y1="17" x2="30" y2="17" stroke="#C9A84C" stroke-width="1"/>
+      </svg>
+      <span class="brand-name">URGAZ</span>
+    </div>
+    <span class="header-badge">Premium</span>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <!-- Woven carpet texture background -->
+    <svg class="hero-texture" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="weave" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="5"  x2="20" y2="5"  stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="0" y1="15" x2="20" y2="15" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="5"  y1="0" x2="5"  y2="20" stroke="#C9A84C" stroke-width="0.8"/>
+          <line x1="15" y1="0" x2="15" y2="20" stroke="#C9A84C" stroke-width="0.8"/>
+        </pattern>
+        <pattern id="diamond" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <polygon points="20,2 38,20 20,38 2,20" fill="none" stroke="#C9A84C" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="400" fill="url(#weave)"/>
+      <rect width="400" height="400" fill="url(#diamond)"/>
+    </svg>
+
+    <div class="hero-eyebrow">Yangi mavsum 2025</div>
+
+    <h1>
+      Premium<br/>
+      <span>Gilamlar</span> &amp;<br/>
+      Gilam Mahsulotlari
+    </h1>
+
+    <p class="hero-sub">
+      Yangi mavsum kolleksiyasi va maxsus takliflar endi onlayn katalogimizda. Sifat, nafosatlar va zamonaviy dizayn birida.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Model</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Yil tajriba</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">5K+</div>
+        <div class="stat-label">Mijozlar</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CATALOG ── -->
+  <div class="section-header">
+    <div class="section-eyebrow">Kolleksiya 2025</div>
+    <h2 class="section-title">Tanlangan Mahsulotlar</h2>
+  </div>
+
+  <section class="catalog">
+    <div class="grid">
+
+      <!-- Card 1: Premium Silk -->
+      <div class="card">
+        <div class="card-img">
+          <svg viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="180" height="240" fill="#1A1428"/>
+            <!-- Silk pattern: flowing diagonal gradient shimmer -->
+            <defs>
+              <linearGradient id="silk" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#2A1F40"/>
+                <stop offset="50%"  stop-color="#3D2B5A"/>
+                <stop offset="100%" stop-color="#1A1428"/>
+              </linearGradient>
+              <linearGradient id="silkSheen" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="rgba(201,168,76,0)"/>
+                <stop offset="50%"  stop-color="rgba(201,168,76,0.2)"/>
+                <stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+              </linearGradient>
+            </defs>
+            <rect width="180" height="240" fill="url(#silk)"/>
+            <!-- Central medallion -->
+            <polygon points="90,30 150,90 90,150 30,90" fill="none" stroke="#C9A84C" stroke-width="1.2" opacity="0.6"/>
+            <polygon points="90,45 135,90 90,135 45,90" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
+            <polygon points="90,60 120,90 90,120 60,90" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="0.6" opacity="0.5"/>
+            <circle cx="90" cy="90" r="12" fill="rgba(201,168,76,0.15)" stroke="#C9A84C" stroke-width="1"/>
+            <circle cx="90" cy="90" r="4" fill="#C9A84C" opacity="0.7"/>
+            <!-- Corner ornaments -->
+            <rect x="8"  y="8"  width="16" height="16" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.4" transform="rotate(45 16 16)"/>
+            <rect x="156" y="8"  width="16" height="16" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.4" transform="rotate(45 164 16)"/>
+            <rect x="8"  y="216" width="16" height="16" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.4" transform="rotate(45 16 224)"/>
+            <rect x="156" y="216" width="16" height="16" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.4" transform="rotate(45 164 224)"/>
+            <!-- Sheen overlay -->
+            <rect width="180" height="240" fill="url(#silkSheen)" opacity="0.5"/>
+            <!-- Border -->
+            <rect x="4" y="4" width="172" height="232" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+          </svg>
+          <div class="card-badge">Yangi</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Premium Silk</div>
+          <div class="card-meta">200×300 sm · Ipak</div>
+          <div class="card-price-row">
+            <span class="card-price">1,850,000</span>
+            <span class="card-unit">so'm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Modern Geometry -->
+      <div class="card">
+        <div class="card-img">
+          <svg viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="180" height="240" fill="#0E1A20"/>
+            <defs>
+              <linearGradient id="geo-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0E1A20"/>
+                <stop offset="100%" stop-color="#162430"/>
+              </linearGradient>
+            </defs>
+            <rect width="180" height="240" fill="url(#geo-bg)"/>
+            <!-- Geometric grid pattern -->
+            <line x1="0"   y1="60"  x2="180" y2="60"  stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+            <line x1="0"   y1="120" x2="180" y2="120" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+            <line x1="0"   y1="180" x2="180" y2="180" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+            <line x1="60"  y1="0"   x2="60"  y2="240" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+            <line x1="120" y1="0"   x2="120" y2="240" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+            <!-- Featured geometry -->
+            <rect x="30" y="60" width="60" height="60" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+            <rect x="90" y="120" width="60" height="60" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+            <polygon points="90,60 150,60 120,120" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+            <polygon points="30,120 90,120 60,180" fill="rgba(201,168,76,0.06)" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
+            <!-- Accent squares -->
+            <rect x="75" y="105" width="30" height="30" fill="#C9A84C" opacity="0.15" stroke="#C9A84C" stroke-width="1"/>
+            <circle cx="90" cy="120" r="5" fill="#C9A84C" opacity="0.5"/>
+            <rect x="4" y="4" width="172" height="232" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.25"/>
+          </svg>
+          <div class="card-badge">Top</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Modern Geometry</div>
+          <div class="card-meta">160×230 sm · Sintetik</div>
+          <div class="card-price-row">
+            <span class="card-price">980,000</span>
+            <span class="card-unit">so'm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Classic Elite -->
+      <div class="card">
+        <div class="card-img">
+          <svg viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="180" height="240" fill="#1A0E0A"/>
+            <defs>
+              <radialGradient id="classic-grd" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#2E160E"/>
+                <stop offset="100%" stop-color="#1A0E0A"/>
+              </radialGradient>
+            </defs>
+            <rect width="180" height="240" fill="url(#classic-grd)"/>
+            <!-- Persian-inspired floral motif -->
+            <ellipse cx="90" cy="120" rx="55" ry="75" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
+            <ellipse cx="90" cy="120" rx="40" ry="58" fill="none" stroke="#C9A84C" stroke-width="0.6" opacity="0.3"/>
+            <!-- Stylized petals -->
+            <ellipse cx="90" cy="75"  rx="12" ry="25" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+            <ellipse cx="90" cy="165" rx="12" ry="25" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+            <ellipse cx="45" cy="120" rx="25" ry="12" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+            <ellipse cx="135" cy="120" rx="25" ry="12" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+            <!-- Diagonal petals -->
+            <ellipse cx="62"  cy="92"  rx="12" ry="22" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="0.6" opacity="0.5" transform="rotate(-45 62 92)"/>
+            <ellipse cx="118" cy="92"  rx="12" ry="22" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="0.6" opacity="0.5" transform="rotate(45 118 92)"/>
+            <ellipse cx="62"  cy="148" rx="12" ry="22" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="0.6" opacity="0.5" transform="rotate(45 62 148)"/>
+            <ellipse cx="118" cy="148" rx="12" ry="22" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="0.6" opacity="0.5" transform="rotate(-45 118 148)"/>
+            <!-- Center -->
+            <circle cx="90" cy="120" r="14" fill="rgba(201,168,76,0.15)" stroke="#C9A84C" stroke-width="1"/>
+            <circle cx="90" cy="120" r="6"  fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="0.8"/>
+            <circle cx="90" cy="120" r="2"  fill="#C9A84C"/>
+            <!-- Corner borders -->
+            <rect x="4" y="4" width="172" height="232" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.35"/>
+            <rect x="10" y="10" width="160" height="220" fill="none" stroke="#C9A84C" stroke-width="0.4" opacity="0.2"/>
+          </svg>
+          <div class="card-badge">Classic</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Classic Elite</div>
+          <div class="card-meta">140×200 sm · Junvor</div>
+          <div class="card-price-row">
+            <span class="card-price">1,250,000</span>
+            <span class="card-unit">so'm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Royal Wool -->
+      <div class="card">
+        <div class="card-img">
+          <svg viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="180" height="240" fill="#101820"/>
+            <defs>
+              <linearGradient id="royal-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="#141E2A"/>
+                <stop offset="100%" stop-color="#0A1018"/>
+              </linearGradient>
+              <pattern id="royal-dots" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+                <circle cx="9" cy="9" r="1" fill="#C9A84C" opacity="0.25"/>
+              </pattern>
+            </defs>
+            <rect width="180" height="240" fill="url(#royal-bg)"/>
+            <rect width="180" height="240" fill="url(#royal-dots)"/>
+            <!-- Regal border ornament -->
+            <rect x="12" y="12" width="156" height="216" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+            <rect x="18" y="18" width="144" height="204" fill="none" stroke="#C9A84C" stroke-width="0.4" opacity="0.25"/>
+            <!-- Corner flourishes -->
+            <polygon points="12,12 28,12 12,28" fill="#C9A84C" opacity="0.2"/>
+            <polygon points="168,12 152,12 168,28" fill="#C9A84C" opacity="0.2"/>
+            <polygon points="12,228 28,228 12,212" fill="#C9A84C" opacity="0.2"/>
+            <polygon points="168,228 152,228 168,212" fill="#C9A84C" opacity="0.2"/>
+            <!-- Central crown motif -->
+            <polygon points="90,55 75,75 65,65 70,85 110,85 115,65 105,75" fill="rgba(201,168,76,0.2)" stroke="#C9A84C" stroke-width="1" opacity="0.7"/>
+            <!-- Divider lines -->
+            <line x1="30" y1="100" x2="150" y2="100" stroke="#C9A84C" stroke-width="0.6" opacity="0.4"/>
+            <line x1="30" y1="104" x2="150" y2="104" stroke="#C9A84C" stroke-width="0.3" opacity="0.2"/>
+            <!-- Monogram area -->
+            <text x="90" y="145" text-anchor="middle" font-family="serif" font-size="36" fill="rgba(201,168,76,0.25)" font-style="italic">U</text>
+            <!-- Divider lines bottom -->
+            <line x1="30" y1="165" x2="150" y2="165" stroke="#C9A84C" stroke-width="0.6" opacity="0.4"/>
+            <line x1="30" y1="169" x2="150" y2="169" stroke="#C9A84C" stroke-width="0.3" opacity="0.2"/>
+            <rect x="4" y="4" width="172" height="232" fill="none" stroke="#C9A84C" stroke-width="0.4" opacity="0.2"/>
+          </svg>
+          <div class="card-badge">Bestseller</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Royal Wool</div>
+          <div class="card-meta">200×300 sm · Jun</div>
+          <div class="card-price-row">
+            <span class="card-price">2,100,000</span>
+            <span class="card-unit">so'm</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── OFFER BANNER ── -->
+  <div class="offer-banner">
+    <div class="offer-icon">✦</div>
+    <div class="offer-text">
+      <h3>Maxsus mavsum taklifi</h3>
+      <p>Bugun buyurtma bering va 3 m² gacha bepul o'rnatish xizmatidan foydalaning.</p>
+    </div>
+  </div>
+
+  <!-- ── FEATURES ── -->
+  <div class="section-header" style="padding-top: 8px;">
+    <div class="section-eyebrow">Nima uchun URGAZ?</div>
+    <h2 class="section-title">Bizning Afzalliklar</h2>
+  </div>
+
+  <div class="features">
+    <div class="feature-item">
+      <div class="feature-icon">🪡</div>
+      <div class="feature-text">
+        <h4>Yuqori sifatli xomashyo</h4>
+        <p>Faqat tabiiy va premium sintetik materiallar ishlatiladi.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📐</div>
+      <div class="feature-text">
+        <h4>O'lcham bo'yicha ishlab chiqarish</h4>
+        <p>Har qanday xona o'lchamiga mos individual buyurtma.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-text">
+        <h4>Tezkor yetkazib berish</h4>
+        <p>Toshkent bo'ylab 1–2 kun ichida, viloyatlarga 3–5 kun.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-text">
+        <h4>2 yil kafolat</h4>
+        <p>Barcha mahsulotlarimizga to'liq ishlab chiqaruvchi kafolati.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA INLINE ── -->
+  <div class="cta-section">
+    <div class="cta-divider"></div>
+    <p>Buyurtma berish yoki savol so'rash uchun bog'laning</p>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">URGAZ</div>
+    <div class="footer-tagline">Premium Carpet Manufacturing</div>
+    <div class="footer-sep"></div>
+    <div class="footer-legal">
+      © 2025 URGAZ. Barcha huquqlar himoyalangan.<br/>
+      Toshkent, O'zbekiston
+    </div>
+  </footer>
+
+  <!-- ── STICKY CTA BAR ── -->
+  <div class="sticky-cta">
+    <a class="btn btn-primary" href="https://t.me/urgaz_carpet" target="_blank" rel="noopener">
+      <span class="btn-icon">✈</span>
+      <span>Telegram buyurtma</span>
+    </a>
+    <a class="btn btn-secondary" href="tel:+998901234567">
+      <span class="btn-icon">📞</span>
+      <span>Mutaxassis</span>
+    </a>
+  </div>
+
+</body>
+</html>
